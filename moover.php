@@ -9,6 +9,24 @@
 
 if (!defined('ABSPATH')) exit;
 
+/**
+ * WooCommerce dependency check
+ */
+function moover_woocommerce_check() {
+    if (!class_exists('WooCommerce')) {
+        add_action('admin_notices', function () {
+            echo '<div class="notice notice-error"><p><strong>Moover:</strong> WooCommerce is required.</p></div>';
+        });
+        return false;
+    }
+    return true;
+}
+
+if (!moover_woocommerce_check()) {
+    return;
+}
+
+// Define paths
 define('MOOVER_PATH', plugin_dir_path(__FILE__));
 define('MOOVER_URL', plugin_dir_url(__FILE__));
 
@@ -18,9 +36,25 @@ require_once MOOVER_PATH . 'includes/class-admin.php';
 require_once MOOVER_PATH . 'includes/class-email.php';
 require_once MOOVER_PATH . 'includes/class-rewrite.php';
 
+// Init plugin
 function moover_init() {
     new Moover_Tracking();
     new Moover_Admin();
     new Moover_Rewrite();
 }
 add_action('plugins_loaded', 'moover_init');
+
+/**
+ * Activation hook (FIXED)
+ */
+register_activation_hook(__FILE__, function () {
+    require_once MOOVER_PATH . 'includes/class-rewrite.php';
+    flush_rewrite_rules();
+});
+
+/**
+ * Deactivation hook (FIXED)
+ */
+register_deactivation_hook(__FILE__, function () {
+    flush_rewrite_rules();
+});
