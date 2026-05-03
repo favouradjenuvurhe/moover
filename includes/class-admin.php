@@ -10,10 +10,12 @@ class Moover_Admin {
 
         if (!is_a($order, 'WC_Order')) return;
 
+        if (!current_user_can('manage_woocommerce')) return;
+
         $email = $order->get_billing_email();
 
-        $message = "Your order #$order_id is now: " . strtoupper($new_status);
+        $message = "Your order #$order_id status is now: " . strtoupper($new_status);
 
-        wp_mail($email, "Moover Shipment Update", $message);
+        wp_mail($email, "Moover Delivery Update", $message);
     }
 }
