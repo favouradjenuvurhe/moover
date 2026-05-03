@@ -1,0 +1,70 @@
+/*
+ * Moover – Order Tracking Styles
+ * GPL-2.0 License
+ */
+
+/* Base container */
+.moover-container {
+    max-width: 700px;
+    margin: 30px auto;
+    padding: 20px;
+    font-family: Arial, sans-serif;
+    background: #ffffff;
+    border: 1px solid #e5e5e5;
+    border-radius: 10px;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+}
+
+/* Title */
+.moover-container h2 {
+    font-size: 22px;
+    margin-bottom: 15px;
+    color: #222;
+}
+
+/* Order info text */
+.moover-container p {
+    font-size: 14px;
+    color: #444;
+    margin: 6px 0;
+}
+
+/* Section headings */
+.moover-container h3 {
+    margin-top: 20px;
+    font-size: 16px;
+    color: #111;
+}
+
+/* Items list */
+.moover-container ul {
+    list-style: none;
+    padding: 0;
+    margin: 10px 0;
+}
+
+.moover-container ul li {
+    padding: 8px 10px;
+    margin-bottom: 6px;
+    background: #f8f8f8;
+    border-left: 4px solid #2d89ef;
+    border-radius: 4px;
+    font-size: 14px;
+    color: #333;
+}
+
+/* Timeline styling */
+.moover-container .timeline li {
+    border-left: 4px solid #28a745;
+    background: #f1fff4;
+}
+
+/* Status badge (optional future use) */
+.moover-status {
+    display: inline-block;
+    padding: 5px 10px;
+    background: #2d89ef;
+    color: #fff;
+    border-radius: 20px;
+    font-size: 12px;
+}
