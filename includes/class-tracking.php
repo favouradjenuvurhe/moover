@@ -7,23 +7,24 @@ class Moover_Tracking {
         add_action('template_redirect', [$this, 'handle_url']);
     }
 
-    // SHORTCODE SUPPORT
     public function shortcode() {
         ob_start();
         include MOOVER_PATH . 'templates/tracking-page.php';
         return ob_get_clean();
     }
 
-    // CLEAN URL SUPPORT
     public function handle_url() {
+
         $order_id = get_query_var('moover_order_id');
 
         if (!$order_id) return;
 
+        $order_id = intval($order_id);
+
         $order = wc_get_order($order_id);
 
-        if (!$order) {
-            wp_die('Order not found.');
+        if (!$order || $order->get_id() != $order_id) {
+            wp_die('Invalid tracking number.');
         }
 
         include MOOVER_PATH . 'templates/tracking-page.php';
