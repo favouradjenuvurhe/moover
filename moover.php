@@ -10,7 +10,7 @@
 if (!defined('ABSPATH')) exit;
 
 /**
- * WooCommerce dependency check
+ * WooCommerce check
  */
 function moover_woocommerce_check() {
     if (!class_exists('WooCommerce')) {
@@ -26,17 +26,23 @@ if (!moover_woocommerce_check()) {
     return;
 }
 
-// Define paths
+/**
+ * Paths
+ */
 define('MOOVER_PATH', plugin_dir_path(__FILE__));
 define('MOOVER_URL', plugin_dir_url(__FILE__));
 
-// Includes
+/**
+ * Includes
+ */
 require_once MOOVER_PATH . 'includes/class-tracking.php';
 require_once MOOVER_PATH . 'includes/class-admin.php';
 require_once MOOVER_PATH . 'includes/class-email.php';
 require_once MOOVER_PATH . 'includes/class-rewrite.php';
 
-// Init plugin
+/**
+ * Init
+ */
 function moover_init() {
     new Moover_Tracking();
     new Moover_Admin();
@@ -45,10 +51,22 @@ function moover_init() {
 add_action('plugins_loaded', 'moover_init');
 
 /**
+ * Assets (FIXED - IMPORTANT)
+ */
+function moover_assets() {
+    wp_enqueue_style(
+        'moover-style',
+        MOOVER_URL . 'assets/css/style.css',
+        [],
+        '1.0.1'
+    );
+}
+add_action('wp_enqueue_scripts', 'moover_assets');
+
+/**
  * Activation hook (FIXED)
  */
 register_activation_hook(__FILE__, function () {
-    require_once MOOVER_PATH . 'includes/class-rewrite.php';
     flush_rewrite_rules();
 });
 
