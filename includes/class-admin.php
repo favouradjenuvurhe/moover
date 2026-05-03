@@ -3,15 +3,17 @@
 class Moover_Admin {
 
     public function __construct() {
-        add_action('woocommerce_order_status_changed', [$this, 'send_update'], 10, 4);
+        add_action('woocommerce_order_status_changed', [$this, 'status_update'], 10, 4);
     }
 
-    public function send_update($order_id, $old_status, $new_status, $order) {
-        
+    public function status_update($order_id, $old_status, $new_status, $order) {
+
+        if (!is_a($order, 'WC_Order')) return;
+
         $email = $order->get_billing_email();
 
-        $message = "Your order #$order_id status changed to: $new_status";
+        $message = "Your order #$order_id is now: " . strtoupper($new_status);
 
-        wp_mail($email, "Moover Update", $message);
+        wp_mail($email, "Moover Shipment Update", $message);
     }
 }
