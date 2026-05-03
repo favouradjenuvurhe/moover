@@ -58,7 +58,7 @@ function moover_assets() {
         'moover-style',
         MOOVER_URL . 'assets/css/style.css',
         [],
-        '1.0.1'
+        '1.0.0'
     );
 }
 add_action('wp_enqueue_scripts', 'moover_assets');
