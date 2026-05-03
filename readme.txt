@@ -1,5 +1,5 @@
 === Moover – Order Tracking & Delivery Manager ===
-Contributors: Favour Adjenuvurhe
+Contributors: faav11
 Tags: woocommerce, tracking, delivery, orders, logistics, shipment
 Requires at least: 5.8
 Tested up to: 6.5
